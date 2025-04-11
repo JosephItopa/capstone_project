@@ -23,3 +23,11 @@ def load_data():
     df["day"] = df["date"].dt.day
 
     return df
+
+def ml_training_features(df):
+    """
+    Features for model training
+    """
+    X = df[["year", "month"]].values
+    y = df["temperature"].values
+    return X, y

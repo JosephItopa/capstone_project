@@ -4,8 +4,17 @@ import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from preprocess import load_data 
+from utils.preprocess import load_data
+from utils.st_exploratory import show_analysis
 
+# root__________
+#       |--------app.py
+#       |________utils
+#           |-------preprocess.py
+#           |-------exploratory.py
+#           |-------st.exploratory.py
+#           |-------model_training.py
+#           |-------st.model_training.py
 
 # set page configuration
 st.set_page_config(
@@ -24,5 +33,17 @@ page = st.sidebar.radio("Go to", ["EDA", "Model Training", "Prediction"])
 
 df = load_data()
 
-st.dataframe(df)
+if page == "EDA":
+    # call a responsible for EDA
+    show_analysis(df)
+elif page == "Model Training":
+    # algorithm training
+    print("")
+else:
+    # run prediction
+    print("")
+
+
+# df = load_data()
+# st.dataframe(df)
 

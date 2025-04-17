@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 
 from utils.preprocess import load_data
 from utils.st_exploratory import show_analysis
+from utils.st_model_training import show
+from utils.st_prediction import show_pred
 
 # root__________
 #       |--------app.py
@@ -15,6 +17,8 @@ from utils.st_exploratory import show_analysis
 #           |-------st.exploratory.py
 #           |-------model_training.py
 #           |-------st.model_training.py
+#           |-------prediction.py
+#           |-------st_prediction.py
 
 # set page configuration
 st.set_page_config(
@@ -38,10 +42,10 @@ if page == "EDA":
     show_analysis(df)
 elif page == "Model Training":
     # algorithm training
-    print("")
+    show(df)
 else:
     # run prediction
-    print("")
+    show_pred()
 
 
 # df = load_data()

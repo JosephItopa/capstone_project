@@ -24,15 +24,35 @@ def train(X_train, y_train, model_type = "Linear Regression"):
 
     return model
 
-def model_evaluation(model, X_train, y_train, X_test, y_test):
-
+def model_evaluation(model, X_train, X_test, y_train, y_test):
     y_pred_train = model.predict(X_train) 
     y_pred_test = model.predict(X_test)
     metrics = {
-        'training_rmse' : np.sqrt(mean_squared_error(X_train, y_train)),
-        'test_rmse' : np.sqrt(mean_squared_error(X_test, y_test)),
-        'training_r2' : r2_score(X_train, y_train),
-        'test_r2' : r2_score(X_test, y_test)
+        'training_rmse' : np.sqrt(mean_squared_error(y_train, y_pred_train)),
+        'test_rmse' : np.sqrt(mean_squared_error(y_test, y_pred_test)),
+        'training_r2' : r2_score(y_train, y_pred_train),
+        'test_r2' : r2_score(y_test, y_pred_test),
         'y_test': y_test,
-        'y_pred': y_pred
+        'y_pred': y_pred_test
     }
+
+    return metrics
+
+def save_model(model, file_name = "nepal_climate_model.pkl"):
+    """
+    to save model as pickle file
+    """
+    with open(file_name, 'wb') as file:
+        pickle.dump(model, file)
+
+def load_model(file_name = "nepal_climate_model.pkl"):
+    """
+    to load the saved model
+    """
+    try:
+        with open(file_name, 'rb') as file:
+            model = pickle.load(file)
+        return model
+    except FileNotFoundError:
+        return None
+    
